@@ -24,6 +24,8 @@ public class ShowGuidesServlet extends HttpServlet {
 
         ArrayList<JSONObject> listOfGuides = pageController.getAllGuides();
 
+        System.out.println("Guides " + listOfGuides.size());
+
 
         resp.setContentType("application/json");
         try(PrintWriter out = resp.getWriter()) {

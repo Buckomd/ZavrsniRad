@@ -20,8 +20,8 @@ public class ValidationHelper {
     }
 
     public Boolean validatePassword(String password) {
-      // String passwordRegex = "^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$";
-        String passwordRegex = "^[A-Z][a-z]{2,15}$";
+       String passwordRegex = "^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$";
+        //String passwordRegex = "^[A-Z][a-z]{2,15}$";
         return Pattern.matches(passwordRegex, password);
     }
 }

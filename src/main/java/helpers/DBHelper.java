@@ -449,7 +449,7 @@ public class DBHelper {
             return null;
         } else {
             try {
-                String q = "SELECT user_id, user_name, user_lastName FROM users WHERE roles_id = '" + roleId + "'";
+                String q = "SELECT u.user_id, u.user_name, u.user_lastName FROM user_roles ur INNER JOIN users u on ur.user_id = u.user_id WHERE roles_id = '" + roleId + "'";
                 rs = conn.createStatement().executeQuery(q);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -475,6 +475,30 @@ public class DBHelper {
             }
         }
         return rs;
+    }
+
+    public boolean saveNewHomePicture(Blob blob, String title, int regionID){
+        ResultSet rs = null;
+        openConnection();
+        if (conn == null) {
+            System.out.println("Save images for home page failed! Bad connection!");
+            return false;
+        } else {
+            try {
+                String sql = "INSERT INTO homepic(homepic_picture, homepic_naziv, region_id) VALUES(?,?,?)";
+
+
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.setBlob(1, blob);
+                    ps.setString(2, title);
+                    ps.setInt(3,regionID);
+                    ps.executeUpdate();
+
+                return true;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
 
